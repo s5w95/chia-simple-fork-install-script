@@ -98,6 +98,7 @@ do
 			echo "S" | $fork wallet show
 		fi
 		
+		#update certs in cert folder
 		if [ -d ~/blockchain-certs ]; then
 			rm ~/blockchain-certs/$fork -rf
 			mkdir ~/blockchain-certs/$fork
@@ -106,3 +107,9 @@ do
 	fi
    
 done
+
+#remove certs for security reasons from harvester after completion
+if [ $MODE = harvester ]; then
+	rm ~/blockchain-certs -rf
+fi
+
