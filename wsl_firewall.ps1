@@ -13,7 +13,22 @@ if( $found ){
 #[Ports]
 
 #All the chia fork ports you want to forward separated by coma
-$ports=@(4447,28447,18647,6885,9447);
+
+$ports=@(
+	22, #ssh for downloading certs from node
+	8447, #chia
+	4447, #tad
+	28447, #hddcoin
+	18647, #flora
+	6885, #flax
+	9447, #spare
+	6868, #avocado
+	6969, #dogechia
+	6547, #greendoge
+	7447, #goji
+	18447, #seno2
+	8777 #chaingreen
+);
 
 #[Static ip]
 #Your local lan IP
