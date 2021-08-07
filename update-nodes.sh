@@ -1,10 +1,12 @@
 #!/bin/bash
 
 #set mode to harvester or node
-MODE=harvester
+MODE=node
 #set node ip only needed on harvester mode
 NODE_IP=192.168.9.107
 NODE_USER=dev
+#set to true if you want to update already existing forks
+UPDATE=false
 
 BASEDIR=$(dirname "$0")
 . $BASEDIR/forks.config
@@ -25,9 +27,15 @@ do
 	if [ -d ~/.${forksProfile[$index]} ]; then
 		if [ -d ~/.${forksProfile[$index]}/mainnet/log ]; then
 			profileAvailable=true
+			
+			#cancel reinstalling this fork, its already set up, certs will not be added/refreshed for harvester
+			if [ $UPDATE = false ]; then
+				echo "Skipping $fork, already installed!"
+				continue
+			fi
 		fi
 	fi
-
+	
 	#check running instances and shutdown	
 	if [ -d ~/blockchains/$fork ]; then
 		if [ -f ~/blockchains/$fork/activate ]; then
